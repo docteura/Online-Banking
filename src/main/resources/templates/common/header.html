@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="common-header">
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css' />
+
+    <!--bootstrap date-time picker-->
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <!--data table-->
+    <link href="/css/jquery.dataTable.min.css" rel="stylesheet" />
+    <link href="/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <!--<link href="css/scrolling-nav.css" rel="stylesheet" />-->
+    <link href="/css/main.css" rel="stylesheet" />
+    
+    <style type="text/css">
+    	.table-bordered {
+		    border: 1px solid #0553709e;
+		}
+    </style>
+    
+</head>
+<body>
+<!-- Navigation -->
+<div th:fragment="navbar">
+    <img class="img-responsive" src="/images/bann.png" alt="bann"/>
+
+    <nav class="navbar navbar-default " role="navigation">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" th:href="@{/dashboard}">
+            	<i class="fa fa-university" aria-hidden="true"></i>  Home
+            </a>
+        </div>
+
+        <div class="collapse  navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class="hidden">
+                    <a class="page-scroll" href="#page-top"></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    	<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp; Accounts <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/account/primaryAccount}"><i class="fa fa-briefcase" aria-hidden="true"></i> Primary</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/account/savingsAccount}"> <i class="fa fa-th-list" aria-hidden="true"></i> Savings</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp; Bank Transfer <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/transfer/betweenAccounts}"><i class="fa fa-bars" aria-hidden="true"></i>  Between Accounts</a></li>
+                        <li><a th:href="@{/transfer/toSomeoneElse}"><i class="fa fa-sliders" aria-hidden="true"></i>  To Someone Else</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/transfer/recipient}"><i class="fa fa-user fa" aria-hidden="true"></i>&nbsp; Add/Edit Recipient</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar-o"></i>&nbsp; Appointment <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/appointment/create}"><i class="fa fa-calendar"></i> Schedule an Appointment</a></li>
+                        <li><a th:href="@{/appointment/list}"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> All Appointments</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a th:href="@{/cards/list}"  role="button" aria-haspopup="true" aria-expanded="false">
+                    	<i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; Credit Cards 
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user" aria-hidden="true"></i> Me <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/user/profile}"><i class="fa fa-user-secret" aria-hidden="true"></i> Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+
+<div th:fragment="body-bottom-scripts">
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script src="/js/jquery.easing.min.js"></script>
+
+    <!--bootstrap date-time picker-->
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--bootbox-->
+    <script src="/js/bootbox.min.js"></script>
+
+    <!--data table-->
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+
+    <!--main js-->
+    <script src="/js/main.js"></script>
+</div>
+
+</body>
+</html>

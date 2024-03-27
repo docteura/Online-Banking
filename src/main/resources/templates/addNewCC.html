@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+    <div class="col-md-3"></div>
+        <div class="col-md-6" style=" border: dashed 2px #2c99bb;">
+            <h3>Credit Card Information</h3>
+            <form th:action="@{/cards/save}" method="post">
+				<input type="hidden" name="cardId" th:value="${creditCard.cardId}"/>
+                <div class="form-group">
+                    <label for="recipientName">Name</label>
+                    <input type="text" class="form-control" name="name" th:value="${creditCard.name}"
+                           id="ccName" placeholder="Name" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="recipientEmail">Email</label>
+                    <input type="email" class="form-control" name="email" th:value="${creditCard.email}"
+                           id="recipientEmail" placeholder="Email" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="recipientAccountNumber">Card Number</label>
+                    <input type="text" class="form-control"  
+                           name="cardNumber" id="cardAccountNumber" th:value="${creditCard.cardNumber}"  placeholder="Card Number" required="required"/>
+                </div>
+                 <div class="form-group">
+                    <label for="recipientName">Card Type</label>
+                    <input type="text" class="form-control"  name="cardType" th:value="${creditCard.cardType}"
+                           id="cardType" placeholder="Name" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="recipientName">Bank Name</label>
+                    <input type="text" class="form-control"  name="bankName" th:value="${creditCard.bankName}" id="bankName" placeholder="Bank Name" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="recipientPhone">CVV</label>
+                    <input type="text" class="form-control" name="cvv" th:value="${creditCard.cvv}"
+                           id="recipientPhone" placeholder="CVV"/>
+                </div>
+                <div class="form-group">
+                    <label for="recipientDescription">Description</label>
+                    <textarea class="form-control"  name="description" id="description"  placeholder="Description" required="required">[[${creditCard.description}]]</textarea>
+                </div>
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+				<div align="center">
+	                <button class="btn btn-primary" type="submit">Add/Edit Card</button>
+	                <a  class="btn btn-danger" th:href="@{/cards/list}">Cancel</a>
+                </div>
+            </form>
+ 			<br/>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <br/>
+    
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>
