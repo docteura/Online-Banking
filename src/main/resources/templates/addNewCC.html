@@ -26,9 +26,9 @@
                            name="cardNumber" id="cardAccountNumber" th:value="${creditCard.cardNumber}"  placeholder="Card Number" max="16" required="required"/>
                 </div>
                  <div class="form-group">
-                    <label for="recipientName">Card Type</label>
+                    <label for="recipientName">Card Type  ( V, M, D, A, G )</label>
                     <input type="text" class="form-control"  name="cardType" th:value="${creditCard.cardType}"
-                           id="cardType" placeholder="Name" required="required"/>
+                           id="cardType" placeholder="Card Type" required="required"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientName">Bank Name</label>
@@ -46,7 +46,9 @@
                 <input type="hidden"
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
+                  <strong>Note :</strong><span style="font-size: 12px;">  V - Visa, M - MasterCard, D - Discovery, A - America Express, G - General </span><br/>
 				<div align="center">
+					<br/>
 	                <button class="btn btn-primary" type="submit">Add/Edit Card</button>
 	                <a  class="btn btn-danger" th:href="@{/cards/list}">Cancel</a>
                 </div>
