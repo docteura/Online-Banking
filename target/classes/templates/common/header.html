@@ -79,7 +79,7 @@
                         <li><a th:href="@{/transfer/betweenAccounts}"><i class="fa fa-bars" aria-hidden="true"></i>  Between Accounts</a></li>
                         <li><a th:href="@{/transfer/toSomeoneElse}"><i class="fa fa-sliders" aria-hidden="true"></i>  To Someone Else</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a th:href="@{/transfer/recipient}"><i class="fa fa-user fa" aria-hidden="true"></i>&nbsp; Add/Edit Recipient</a></li>
+                        <li><a th:href="@{/transfer/recipient}"><i class="fa fa-user fa" aria-hidden="true"></i>&nbsp; Add/Edit Beneficiary</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -111,6 +111,13 @@
 </nav>
 </div>
 
+<hr/>
+<div class="footer" align="center">
+ <footer>
+  <p>Author: Hege Refsnes<br>
+  <a href="mailto:hege@example.com">hege@example.com</a></p>
+</footer> 
+</div>
 <div th:fragment="body-bottom-scripts">
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>

@@ -6,7 +6,7 @@
 <div class="container main">
     <div class="row">
         <div class="col-md-6" style=" border: dashed 2px #2c99bb;">
-            <h3>Recipient Information</h3>
+            <h3>Beneficiary Information</h3>
             <form th:action="@{/transfer/recipient/save}" method="post">
                 <input type="hidden" name="id" th:value="${recipient.id}" />
 
@@ -40,7 +40,7 @@
                        name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
 
-                <button class="btn btn-primary" type="submit">Add/Edit Recipient</button>
+                <button class="btn btn-primary" type="submit">Add/Edit Beneficiary</button>
             </form>
 			 <br/>
             <div class="col-md-6">
@@ -49,15 +49,15 @@
     </div>
     <br/>
     <div class="row">
-        <h3>List of Recipients</h3>
+        <h3>List of Beneficiaries</h3>
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>Recipient Name</th>
-                    <th>Recipient Email</th>
-                    <th>Recipient Phone</th>
-                    <th>Recipient Account Number</th>
+                    <th>Beneficiary Name</th>
+                    <th>Beneficiary Email</th>
+                    <th>Beneficiary Phone</th>
+                    <th>Beneficiary Account Number</th>
                     <th>Description</th>
                     <th></th>
                 </tr>
@@ -79,6 +79,9 @@
 
 
 <div th:replace="common/header :: body-bottom-scripts"/>
+
+<head th:replace="common/footer :: footerbar"/>
+<div th:replace="common/footer :: footer-bottom-scripts"/>
 
 </body>
 </html>

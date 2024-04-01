@@ -25,10 +25,12 @@ import com.obs.domain.security.UserRole;
 @Entity
 public class User implements UserDetails{
 
-    @Id
+    private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId", nullable = false, updatable = false)
     private Long userId;
+    @Column(name = "username", nullable = false, updatable = false,unique = true)
     private String username;
     private String password;
     private String firstName;

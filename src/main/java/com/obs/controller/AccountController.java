@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.obs.domain.PrimaryAccount;
 import com.obs.domain.PrimaryTransaction;
 import com.obs.domain.SavingsAccount;
@@ -32,7 +32,7 @@ public class AccountController {
 	@Autowired
 	private TransactionService transactionService;
 	
-	@RequestMapping("/primaryAccount")
+	@GetMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal) {
 		List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
 		
@@ -45,7 +45,7 @@ public class AccountController {
 		return "primaryAccount";
 	}
 
-	@RequestMapping("/savingsAccount")
+	@GetMapping("/savingsAccount")
     public String savingsAccount(Model model, Principal principal) {
 		List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
         User user = userService.findByUsername(principal.getName());
@@ -57,7 +57,7 @@ public class AccountController {
         return "savingsAccount";
     }
 	
-	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
+	@GetMapping("/deposit")
     public String deposit(Model model) {
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
@@ -65,14 +65,14 @@ public class AccountController {
         return "deposit";
     }
 
-    @RequestMapping(value = "/deposit", method = RequestMethod.POST)
+    @PostMapping("/deposit")
     public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.deposit(accountType, Double.parseDouble(amount), principal);
 
         return "redirect:/dashboard";
     }
     
-    @RequestMapping(value = "/withdraw", method = RequestMethod.GET)
+    @GetMapping("/withdraw")
     public String withdraw(Model model) {
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
@@ -80,7 +80,7 @@ public class AccountController {
         return "withdraw";
     }
 
-    @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+    @PostMapping("/withdraw")
     public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.withdraw(accountType, Double.parseDouble(amount), principal);
 
