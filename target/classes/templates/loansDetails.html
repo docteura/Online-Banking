@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body roleId="page-top" data-spy="scroll"
+	data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar" />
+<div class="container ">
+
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="panel-heading">
+				<div class="panel-title text-center">
+					<h1 class="title" th:if="${loanId == '1'}">Home Loan</h1>
+					<h1 class="title" th:if="${loanId == '2'}">Personal Loan</h1>
+					<h1 class="title" th:if="${loanId == '3'}">Education Loan</h1>
+					<h1 class="title" th:if="${loanId == '4'}">Gold Loan</h1>
+					<hr />
+				</div>
+				<table class="responstable">
+					<tr>
+						<th></th>
+						<th th:if="${loanId == '1'}">Home Loan Details</th>
+						<th th:if="${loanId == '2'}">Personal Loan Details</th>
+						<th th:if="${loanId == '3'}">Education Loan Details</th>
+						<th th:if="${loanId == '4'}">Gold Loan Details</th>
+					</tr>
+					<tr>
+						<td>
+						    <img class="" src="/images/homeloan1.png" alt="Home Loan" style="width: 109px; height: 74px;" th:if="${loanId == '1'}" />
+							<img class="" src="/images/personalloan.png" alt="Personal Loan" style="width: 109px; height: 74px;" th:if="${loanId == '2'}" />
+							<img class="" src="/images/studyloan.png" alt="Education Loan" style="width: 109px; height: 74px;" th:if="${loanId == '3'}" />
+							<img class="" src="/images/goldloan.jpg" alt="Gold Loan" style="width: 109px; height: 74px;" th:if="${loanId == '4'}" />
+						</td>
+						<td colspan="2" th:if="${loanId == '1'}">Home loans are one
+							of the most preferred financial tools that enables an individual
+							to purchase a plot of loan or a residential property instantly.
+
+							These loans are provided by Banks and housing finance companies
+							(HFCs), and they have designed special schemes wide range of
+							customers, including farmers, women, doctors, CA, etc. Here are
+							the required details of various home loans/Housing Loans offered
+							by various banks and financial institutions.
+							
+							<strong>Home Loan Eligibility </strong>
+							The following is the list of eligibility criteria
+							<table class="responstable">
+								<tr>
+									<th>Eligibility Criteria	Requirement</th>
+									<th>Requirement</th>
+								</tr>
+								<tr>
+									<td>Age :</td>
+									<td>Minimum Age: 18 years and Maximum Age: 70 years
+									</td>
+								</tr>
+								<tr>
+									<td>Resident Type	</td>
+									<td>
+										The applicant must be (anyone):
+											Resident Indian
+											Non-Resident India (NRI)
+											Person of Indian Origin (PIO)
+									</td>
+								</tr>
+								<tr>
+									<td>Employment</td>
+									<td>
+										The applicant can be (anyone):
+										Salaried
+										Self-employed
+									</td>
+								</tr>
+								<tr>
+									<td>Net Annual Income	</td>
+									<td>
+										At least Rs.5-6 lakh depending on the type of employment
+									</td>
+								</tr>
+								<tr>
+									<td>Residence	</td>
+									<td>
+										The applicant must have (anyone):
+										A permanent residence
+										A rented residence where they have resided for at least a year before to applying for a loan
+									</td>
+								</tr>
+								<tr>
+									<td>Credit score </td>
+									<td>
+										A good credit score of at least 750 or more obtained from a recognised credit bureau
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td colspan="2" th:if="${loanId == '2'}">A Personal loan is a
+							type of unsecured loan that you can borrow from a bank or
+							financial institution if you require funds to pay for your
+							financial needs.
+							<table class="responstable">
+								<tr>
+									<th colspan="2"></th>
+								</tr>
+								<tr>
+									<td>Interest Rate :</td>
+									<td>10.25% p.a. onwards</td>
+								</tr>
+								<tr>
+									<td>Loan Amount</td>
+									<td>Up to <i class="fa fa-usd" aria-hidden="true"></i> 1
+										crore
+									</td>
+								</tr>
+								<tr>
+									<td>Loan Tenure</td>
+									<td>Up to 6 years</td>
+								</tr>
+								<tr>
+									<td>Processing Fee</td>
+									<td>0% - 6% of the loan amount + GST</td>
+								</tr>
+							</table>
+							<h3>Types of Personal Loan</h3>
+							<p>There are two types of personal loan schemes. They are:</p>
+
+							<p>
+								<strong>Unsecured Personal Loan: </strong>Under these types of
+								personal loan schemes, you don’t need to provide any security or
+								collateral to the bank. If you meet all the eligibility criteria
+								and have a decent credit score, then you can avail yourself of
+								an unsecured personal loan.
+							<p>
+								<strong>Secured Personal Loan: </strong> Under these types of
+								personal loan schemes, you will need to provide some form of
+								security or collateral to the bank. A business loan or a gold
+								loan is an example of a secured loan as you may have to provide
+								some form of property to apply for a business loan and gold if
+								you wish to avail a gold loan.
+							</p> <br />
+							<h3>Top Personal Loan Schemes and Offers</h3>
+							<p>You can either visit the official website of the bank to
+								directly apply for a personal loan or visit the BankBazaar.com
+								website to compare different loans and then apply for one which
+								suits you best.</p>
+							<h3>Personal Loan Interest Rates</h3>
+							<p>The personal loan interest rates vary between 10.15% p.a.
+								and 36% p.a. Depending on the loan amount availed by you, your
+								credit score, and repayment tenure, the interest rate charged on
+								your loan is decided. If you maintain a high credit score and
+								have a good relationship with the bank, then the interest rate
+								on your personal loan can be lowered.</p>
+
+							<h3>Uses of Personal Loan</h3>
+							<p>What can you use a personal loan for? Since it is an
+								unsecured loan without the need for any collateral, there are
+								very few limitations on how you can use a personal loan. It can
+								broadly be used for consolidating your debt (from other loans or
+								credit cards), making high-value purchases for which you do not
+								have cash in hand, or for emergency situations. It cannot be
+								used for speculative purposes or for making investments in the
+								stock market. Some of the common reasons that people take out
+								personal loans for includes meeting sudden business or
+								educational expenses, paying for a vacation, buying high-end
+								electronic gadgets or household appliances, wedding expenses,
+								emergency medical expenses, home renovations, etc. It can also
+								be used for buying a vehicle if the rate of interest on the
+								personal loan is lower than that of a vehicle loan. Thus, a
+								personal loan has a wide variety of uses and can come in handy
+								for meeting either planned or emergency expenditure.</p>
+							<h3>Personal Loan Eligibility Criteria</h3>
+							<p>The following factors are taken into consideration when a
+								lender goes through your loan application. If you meet these
+								criteria, you are eligible for a personal loan:</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="panel-heading">
+
+				<table class="responstable">
+					<tr>
+						<th colspan="2"></th>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+	</div>
+	<br />
+
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts" />
+<br />
+<div th:replace="common/footer :: footerbar" />
+
+</body>
+</html>
