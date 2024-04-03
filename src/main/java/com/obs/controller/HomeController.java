@@ -28,7 +28,7 @@ import com.obs.service.UserService;
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -41,7 +41,9 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		String success = (String) model.asMap().get("success");
+		boolean flag = (boolean) model.asMap().get("flag");
 		model.addAttribute("success", success);
+		model.addAttribute("flag", flag);
 		return "redirect:/index";
 	}
 
@@ -87,12 +89,11 @@ public class HomeController {
 	@GetMapping("/verify-account")
 	public String verifyAccount(@RequestParam String email, @RequestParam String otp, Model model,
 			final RedirectAttributes redirectAttributess) {
-		logger.info("verifyAccount ---> email : {}, OTP : {} ",email, otp);
+		logger.info("verifyAccount ---> email : {}, OTP : {} ", email, otp);
 		String message = emailService.verifyAccount(email, otp);
 		redirectAttributess.addFlashAttribute("success", message);
 		return "redirect:/regenerate-otp";
 	}
-
 
 	@GetMapping("/regenerate-otp")
 	public String regenerateOTP(Model model, final RedirectAttributes redirectAttributess) {
@@ -101,12 +102,13 @@ public class HomeController {
 		model.addAttribute("user", user);
 		return "regenerate-otp";
 	}
-	
+
 	@PostMapping("/regenerate-otp")
 	public String regenerateOtp(@ModelAttribute("user") User user, final RedirectAttributes redirectAttributess) {
-		logger.info("regenerateOtp ---> email : {}",user.getEmail());
+		logger.info("regenerateOtp ---> email : {}", user.getEmail());
 		String message = emailService.regenerateOtp(user.getEmail());
 		redirectAttributess.addFlashAttribute("success", message);
+		redirectAttributess.addFlashAttribute("flag", true);
 		return "redirect:/";
 	}
 
