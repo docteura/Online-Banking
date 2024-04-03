@@ -44,7 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/console/**",
-            "/signup"
+            "/signup",
+            "/verify-account",
+            "/regenerate-otp"
     };
 
     @Override

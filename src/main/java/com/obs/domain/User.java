@@ -1,5 +1,6 @@
 package com.obs.domain;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +41,10 @@ public class User implements UserDetails{
     private String email;
     private String phone;
 
-    private boolean enabled=true;
+    private boolean enabled;
+    
+    private String otp;
+    private LocalDateTime otpGeneratedTime;
 
     @OneToOne
     private PrimaryAccount primaryAccount;
@@ -205,5 +209,22 @@ public class User implements UserDetails{
         return enabled;
     }
 
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public LocalDateTime getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+
+	public void setOtpGeneratedTime(LocalDateTime otpGeneratedTime) {
+		this.otpGeneratedTime = otpGeneratedTime;
+	}
+
+    
 
 }

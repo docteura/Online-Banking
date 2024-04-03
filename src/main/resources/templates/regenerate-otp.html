@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+<!-- Login Section -->
+    <img class="img-responsive" src="/images/bann.png" alt="bann"/>
+    <div class="container">
+        <div class="row ">
+            <div class="main-center " style="max-width: 469px;">
+                <div class="bg-danger" th:if="${param.error}">
+                    Invalid username and secret.
+                </div>
+                <div class="bg-danger" th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <form class="form-signin" th:action="@{/regenerate-otp}" method="post" >
+                    <h2 class="form-signin-heading" align="center">Generate new OTP</h2>
+                    <div class="form-group">
+                        <label for="username" class="sr-only">Email</label>
+                         <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="email" th:value="${user.email}"  name="email" roleId="email"  placeholder="Enter your Email" style="height: 45px;" required="required"/>
+                        </div>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Generate OTP</button>
+                </form>
+                <hr />
+                <div class="form-group ">
+                    <a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/}">Cancel</a>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+ <br/>   
+<div th:replace="common/footer :: footerbar"/>

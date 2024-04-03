@@ -26,9 +26,9 @@
                            id="recipientPhone" placeholder="Phone"/>
                 </div>
                 <div class="form-group">
-                    <label for="recipientAccountNumber">Account Number</label>
+                    <label for="recipientAccountNumber">Account Number (***-****-***)</label>
                     <input type="text" class="form-control" th:value="${recipient.accountNumber}"
-                           name="accountNumber" id="recipientAccountNumber" placeholder="Account Number"/>
+                           name="accountNumber" id="recipientAccountNumber" placeholder="Account Number (***-****-***)" maxlength="12"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientDescription">Description</label>
@@ -51,7 +51,7 @@
     <div class="row">
         <h3>List of Beneficiaries</h3>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped">
+            <table id="example" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th>Beneficiary Name</th>
@@ -81,6 +81,10 @@
 <div th:replace="common/header :: body-bottom-scripts"/>
 <br/>
 <div th:replace="common/footer :: footerbar"/>
-
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
 </body>
 </html>

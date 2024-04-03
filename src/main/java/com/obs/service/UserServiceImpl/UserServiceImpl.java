@@ -1,7 +1,10 @@
 package com.obs.service.UserServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+
+import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.obs.dao.RoleDao;
 import com.obs.dao.UserDao;
+import com.obs.dao.util.EmailUtil;
+import com.obs.dao.util.OtpUtil;
 import com.obs.domain.User;
 import com.obs.domain.security.UserRole;
 import com.obs.service.AccountService;
@@ -19,102 +24,116 @@ import com.obs.service.UserService;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
-    private RoleDao roleDao;
+	private RoleDao roleDao;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private AccountService accountService;
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AccountService accountService;
+
+	@Autowired
+	private OtpUtil otpUtil;
+	@Autowired
+	private EmailUtil emailUtil;
+
 	public void save(User user) {
-        userDao.save(user);
-    }
+		userDao.save(user);
+	}
 
-    public User findByUsername(String username) {
-        return userDao.findByUsername(username);
-    }
+	public User findByUsername(String username) {
+		return userDao.findByUsername(username);
+	}
 
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email);
-    }
-    
-    
-    public User createUser(User user, Set<UserRole> userRoles) {
-        User localUser = userDao.findByUsername(user.getUsername());
+	public User findByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
 
-        if (localUser != null) {
-            LOG.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
-        } else {
-            String encryptedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encryptedPassword);
+	public User createUser(User user, Set<UserRole> userRoles) {
+		User localUser = userDao.findByUsername(user.getUsername());
 
-            for (UserRole ur : userRoles) {
-                roleDao.save(ur.getRole());
-            }
+		if (localUser != null) {
+			LOG.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
+		} else {
+			String encryptedPassword = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encryptedPassword);
 
-            user.getUserRoles().addAll(userRoles);
+			for (UserRole ur : userRoles) {
+				roleDao.save(ur.getRole());
+			}
 
-            user.setPrimaryAccount(accountService.createPrimaryAccount());
-            user.setSavingsAccount(accountService.createSavingsAccount());
+			user.getUserRoles().addAll(userRoles);
 
-            localUser = userDao.save(user);
-        }
+			user.setPrimaryAccount(accountService.createPrimaryAccount());
+			user.setSavingsAccount(accountService.createSavingsAccount());
+			
+			String otp = otpUtil.generateOtp();
+			
+			user.setOtp(otp);
+		    user.setOtpGeneratedTime(LocalDateTime.now());
+			try {
+				emailUtil.sendOtpEmail(user.getEmail(), otp);
+			} catch (MessagingException e) {
+				throw new RuntimeException("Unable to send otp please try again");
+			}
 
-        return localUser;
-    }
-    
-    public boolean checkUserExists(String username, String email){
-        if (checkUsernameExists(username) || checkEmailExists(username)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+			localUser = userDao.save(user);
+		}
 
-    public boolean checkUsernameExists(String username) {
-        if (null != findByUsername(username)) {
-            return true;
-        }
+		return localUser;
+	}
 
-        return false;
-    }
-    
-    public boolean checkEmailExists(String email) {
-        if (null != findByEmail(email)) {
-            return true;
-        }
+	public boolean checkUserExists(String username, String email) {
+		if (checkUsernameExists(username) || checkEmailExists(username)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-        return false;
-    }
+	public boolean checkUsernameExists(String username) {
+		if (null != findByUsername(username)) {
+			return true;
+		}
 
-    public User saveUser (User user) {
-        return userDao.save(user);
-    }
-    
-    public List<User> findUserList() {
-        return userDao.findAll();
-    }
+		return false;
+	}
 
-    public void enableUser (String username) {
-        User user = findByUsername(username);
-        user.setEnabled(true);
-        userDao.save(user);
-    }
+	public boolean checkEmailExists(String email) {
+		if (null != findByEmail(email)) {
+			return true;
+		}
 
-    public void disableUser (String username) {
-        User user = findByUsername(username);
-        user.setEnabled(false);
-        System.out.println(user.isEnabled());
-        userDao.save(user);
-        System.out.println(username + " is disabled.");
-    }
+		return false;
+	}
+
+	public User saveUser(User user) {
+		return userDao.save(user);
+	}
+
+	public List<User> findUserList() {
+		return userDao.findAll();
+	}
+
+	public void enableUser(String username) {
+		User user = findByUsername(username);
+		user.setEnabled(true);
+		userDao.save(user);
+	}
+
+	public void disableUser(String username) {
+		User user = findByUsername(username);
+		user.setEnabled(false);
+		System.out.println(user.isEnabled());
+		userDao.save(user);
+		System.out.println(username + " is disabled.");
+	}
 }

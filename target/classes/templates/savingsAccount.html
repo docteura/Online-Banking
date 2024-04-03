@@ -43,7 +43,7 @@
     <!-- /.row -->
 
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+        <table id="example" class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
                 <th>Post Date</th>
@@ -77,6 +77,10 @@
 <div th:replace="common/header :: body-bottom-scripts"/>
 <br/>
 <div th:replace="common/footer :: footerbar"/>
-
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
 </body>
 </html>
