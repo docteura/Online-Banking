@@ -21,34 +21,34 @@ import com.obs.service.UserService;
 @PreAuthorize("hasRole('ADMIN')")
 public class UserResource {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private TransactionService transactionService;
+	@Autowired
+	private TransactionService transactionService;
 
-    @GetMapping(value = "/user/all")
-    public List<User> userList() {
-        return userService.findUserList();
-    }
+	@GetMapping(value = "/user/all")
+	public List<User> userList() {
+		return userService.findUserList();
+	}
 
-    @GetMapping("/user/primary/transaction")
-    public List<PrimaryTransaction> getPrimaryTransactionList(@RequestParam("username") String username) {
-        return transactionService.findPrimaryTransactionList(username);
-    }
+	@GetMapping("/user/primary/transaction")
+	public List<PrimaryTransaction> getPrimaryTransactionList(@RequestParam("username") String username) {
+		return transactionService.findPrimaryTransactionList(username);
+	}
 
-    @GetMapping("/user/savings/transaction")
-    public List<SavingsTransaction> getSavingsTransactionList(@RequestParam("username") String username) {
-        return transactionService.findSavingsTransactionList(username);
-    }
+	@GetMapping("/user/savings/transaction")
+	public List<SavingsTransaction> getSavingsTransactionList(@RequestParam("username") String username) {
+		return transactionService.findSavingsTransactionList(username);
+	}
 
-    @GetMapping("/user/{username}/enable")
-    public void enableUser(@PathVariable("username") String username) {
-        userService.enableUser(username);
-    }
+	@GetMapping("/user/{username}/enable")
+	public void enableUser(@PathVariable("username") String username) {
+		userService.enableUser(username);
+	}
 
-    @GetMapping("/user/{username}/disable")
-    public void diableUser(@PathVariable("username") String username) {
-        userService.disableUser(username);
-    }
+	@GetMapping("/user/{username}/disable")
+	public void diableUser(@PathVariable("username") String username) {
+		userService.disableUser(username);
+	}
 }
