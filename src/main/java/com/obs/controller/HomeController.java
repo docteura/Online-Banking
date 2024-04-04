@@ -39,6 +39,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home(Model model) {
+		logger.info("HomeController --> home ----> START");
 		String success = (String) model.asMap().get("success");
 		Boolean flag = (Boolean) model.asMap().get("flag");
 		model.addAttribute("success", success);
@@ -48,11 +49,13 @@ public class HomeController {
 
 	@GetMapping("/index")
 	public String index() {
+		logger.info("HomeController --> index ----> START");
 		return "index";
 	}
 
 	@GetMapping("/signup")
 	public String signup(Model model) {
+		logger.info("HomeController --> signup ----> START");
 		User user = new User();
 
 		model.addAttribute("user", user);
@@ -113,6 +116,7 @@ public class HomeController {
 
 	@GetMapping("/dashboard")
 	public String dashboard(Principal principal, Model model) {
+		logger.info("HomeController --> dashboard ----> START");
 		User user = userService.findByUsername(principal.getName());
 		PrimaryAccount primaryAccount = user.getPrimaryAccount();
 		SavingsAccount savingsAccount = user.getSavingsAccount();

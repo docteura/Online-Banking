@@ -3,6 +3,8 @@ package com.obs.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,8 @@ import com.obs.service.UserService;
 @RequestMapping("/account")
 public class AccountController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
 	@Autowired
     private UserService userService;
 	
@@ -35,6 +39,7 @@ public class AccountController {
 	
 	@GetMapping("/primaryAccount")
 	public String primaryAccount(Model model, Principal principal) {
+		logger.info("AccountController --> primaryAccount ---> START");
 		List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
 		
 		User user = userService.findByUsername(principal.getName());
@@ -48,6 +53,7 @@ public class AccountController {
 
 	@GetMapping("/savingsAccount")
     public String savingsAccount(Model model, Principal principal) {
+		logger.info("AccountController --> savingsAccount ---> START");
 		List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
         User user = userService.findByUsername(principal.getName());
         SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -60,6 +66,7 @@ public class AccountController {
 	
 	@GetMapping("/deposit")
     public String deposit(Model model) {
+		logger.info("AccountController --> deposit ---> START");
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
 
@@ -68,13 +75,15 @@ public class AccountController {
 
     @PostMapping("/deposit")
     public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
-        accountService.deposit(accountType, Double.parseDouble(amount), principal);
+    	logger.info("AccountController --> depositPOST ---> START");
+    	accountService.deposit(accountType, Double.parseDouble(amount), principal);
 
         return "redirect:/dashboard";
     }
     
     @GetMapping("/withdraw")
     public String withdraw(Model model) {
+    	logger.info("AccountController --> withdraw ---> START");
         model.addAttribute("accountType", "");
         model.addAttribute("amount", "");
 
@@ -83,7 +92,8 @@ public class AccountController {
 
     @PostMapping("/withdraw")
     public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
-        accountService.withdraw(accountType, Double.parseDouble(amount), principal);
+    	logger.info("AccountController --> withdrawPOST ---> START");
+    	accountService.withdraw(accountType, Double.parseDouble(amount), principal);
 
         return "redirect:/dashboard";
     }

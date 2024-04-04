@@ -3,6 +3,8 @@ package com.obs.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import com.obs.service.UserService;
 @RequestMapping("/cards")
 public class CardController {
 
+	private static final Logger logger = LoggerFactory.getLogger(CardController.class);
+	
 	@Autowired
 	private UserService userService;
 
@@ -29,6 +33,7 @@ public class CardController {
 
 	@GetMapping("/list")
 	public String cards(Principal principal, Model model) {
+		logger.info("CardController --> cards **** START");
 		User user = userService.findByUsername(principal.getName());
 		List<CreditCard> cards = creditCardService.findAllCardsByUserId(user.getUserId());
 		model.addAttribute("cards", cards);
@@ -38,6 +43,7 @@ public class CardController {
 
 	@GetMapping("/addNewCC")
 	public String addNew(Principal principal, Model model) {
+		logger.info("CardController --> addNew **** START");
 		User user = userService.findByUsername(principal.getName());
 		CreditCard creditCard = new CreditCard();
 		model.addAttribute("creditCard", creditCard);
@@ -48,6 +54,7 @@ public class CardController {
 
 	@PostMapping("/save")
 	public String saveNewCard(@ModelAttribute("creditCard") CreditCard creditCard, Principal principal, Model model) {
+		logger.info("CardController --> saveNewCard **** START");
 		User user = userService.findByUsername(principal.getName());
 		creditCard.setUserId(user.getUserId());
 		creditCardService.saveCreditCard(creditCard);
@@ -59,7 +66,7 @@ public class CardController {
 
 	@GetMapping(value = "/edit")
 	public String cardEdit(@RequestParam(value = "cardId") Long cardId, Model model, Principal principal) {
-
+		logger.info("CardController --> cardEdit **** START");
 		CreditCard creditCard = creditCardService.findCCById(cardId);
 		model.addAttribute("creditCard", creditCard);
 
@@ -68,7 +75,7 @@ public class CardController {
 
 	@GetMapping(value = "/view")
 	public String cardView(@RequestParam(value = "cardId") Long cardId, Model model, Principal principal) {
-
+		logger.info("CardController --> cardView **** START");
 		CreditCard creditCard = creditCardService.findCCById(cardId);
 		String cc = creditCard.getCardNumber();
 		String finalCC = null;

@@ -3,6 +3,8 @@ package com.obs.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,8 @@ import com.obs.service.UserService;
 @RequestMapping("/transfer")
 public class TransferController {
 
+	private static final Logger logger = LoggerFactory.getLogger(TransferController.class);
+	
     @Autowired
     private TransactionService transactionService;
 
@@ -28,6 +32,7 @@ public class TransferController {
 
     @GetMapping("/betweenAccounts")
     public String betweenAccounts(Model model) {
+    	logger.info("TransferController --> betweenAccounts ----> START");
         model.addAttribute("transferFrom", "");
         model.addAttribute("transferTo", "");
         model.addAttribute("amount", "");
@@ -42,6 +47,7 @@ public class TransferController {
             @ModelAttribute("amount") String amount,
             Principal principal
     ) throws Exception {
+    	logger.info("TransferController --> betweenAccountsPost ----> START");
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
         SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -52,6 +58,7 @@ public class TransferController {
     
     @GetMapping("/beneficiary")
     public String beneficiary(Model model, Principal principal) {
+    	logger.info("TransferController --> beneficiary ----> START");
         List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
         Beneficiary beneficiary = new Beneficiary();
@@ -64,7 +71,7 @@ public class TransferController {
 
     @PostMapping("/beneficiary/save")
     public String beneficiaryPost(@ModelAttribute("beneficiary") Beneficiary beneficiary, Principal principal) {
-
+    	logger.info("TransferController --> beneficiaryPost ----> START");
         User user = userService.findByUsername(principal.getName());
         beneficiary.setUser(user);
         transactionService.saveRecipient(beneficiary);
@@ -74,7 +81,7 @@ public class TransferController {
 
     @GetMapping("/beneficiary/edit")
     public String beneficiaryEdit(@RequestParam(value = "id") Long id, Model model, Principal principal){
-
+    	logger.info("TransferController --> beneficiaryEdit ----> START");
         Beneficiary beneficiary = transactionService.findRecipientById(id);
         List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
@@ -87,7 +94,7 @@ public class TransferController {
     @GetMapping("/beneficiary/delete")
     @Transactional
     public String beneficiaryDelete(@RequestParam(value = "id") Long id, Model model, Principal principal){
-
+    	logger.info("TransferController --> beneficiaryDelete ----> START");
         transactionService.deleteRecipientById(id);
 
         List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
@@ -102,6 +109,7 @@ public class TransferController {
 
     @GetMapping("/toSomeoneElse")
     public String toSomeoneElse(Model model, Principal principal) {
+    	logger.info("TransferController --> toSomeoneElse ----> START");
         List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
         model.addAttribute("beneficiaries", beneficiaries);
@@ -112,7 +120,8 @@ public class TransferController {
 
     @PostMapping("/toSomeoneElse")
     public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName, @ModelAttribute("accountType") String accountType, @ModelAttribute("amount") String amount, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
+    	logger.info("TransferController --> toSomeoneElsePost ----> START");
+    	User user = userService.findByUsername(principal.getName());
         Beneficiary recipient = transactionService.findRecipientByName(recipientName);
         transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(), user.getSavingsAccount());
 

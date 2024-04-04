@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,43 +24,47 @@ import com.obs.service.UserService;
 @RequestMapping("/appointment")
 public class AppointmentController {
 
-    @Autowired
-    private AppointmentService appointmentService;
+	private static final Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private AppointmentService appointmentService;
 
-    @GetMapping("/list")
-    public String listAppointment(Model model, Principal principal) {
-    	 User user = userService.findByUsername(principal.getName());
-        List<Appointment> appointments = appointmentService.getAppointments(user.getUserId());
-        model.addAttribute("appointments", appointments);
-        model.addAttribute("dateString", "");
+	@Autowired
+	private UserService userService;
 
-        return "appointments";
-    }
-    
-    @GetMapping("/create")
-    public String createAppointment(Model model) {
-        Appointment appointment = new Appointment();
-        model.addAttribute("appointment", appointment);
-        model.addAttribute("dateString", "");
+	@GetMapping("/list")
+	public String listAppointment(Model model, Principal principal) {
+		logger.info("AppointmentController --> listAppointment **** START");
+		User user = userService.findByUsername(principal.getName());
+		List<Appointment> appointments = appointmentService.getAppointments(user.getUserId());
+		model.addAttribute("appointments", appointments);
+		model.addAttribute("dateString", "");
 
-        return "appointment";
-    }
+		return "appointments";
+	}
 
-    @PostMapping("/create")
-    public String createAppointmentPost(@ModelAttribute("appointment") Appointment appointment, @ModelAttribute("dateString") String date, Model model, Principal principal) throws ParseException {
+	@GetMapping("/create")
+	public String createAppointment(Model model) {
+		logger.info("AppointmentController --> createAppointment **** START");
+		Appointment appointment = new Appointment();
+		model.addAttribute("appointment", appointment);
+		model.addAttribute("dateString", "");
 
-        appointment.setDate(new Date());
+		return "appointment";
+	}
 
-        User user = userService.findByUsername(principal.getName());
-        appointment.setUser(user);
+	@PostMapping("/create")
+	public String createAppointmentPost(@ModelAttribute("appointment") Appointment appointment,
+			@ModelAttribute("dateString") String date, Model model, Principal principal) throws ParseException {
+		logger.info("AppointmentController --> createAppointmentPost **** START");
+		appointment.setDate(new Date());
 
-        appointmentService.createAppointment(appointment);
+		User user = userService.findByUsername(principal.getName());
+		appointment.setUser(user);
 
-        return "redirect:/appointment/list";
-    }
+		appointmentService.createAppointment(appointment);
 
+		return "redirect:/appointment/list";
+	}
 
 }
