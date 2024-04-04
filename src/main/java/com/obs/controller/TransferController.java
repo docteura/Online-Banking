@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.obs.domain.PrimaryAccount;
-import com.obs.domain.Recipient;
+import com.obs.domain.Beneficiary;
 import com.obs.domain.SavingsAccount;
 import com.obs.domain.User;
 import com.obs.service.TransactionService;
@@ -49,49 +49,49 @@ public class TransferController {
         return "redirect:/dashboard";
     }
     
-    @GetMapping("/recipient")
-    public String recipient(Model model, Principal principal) {
-        List<Recipient> recipientList = transactionService.findRecipientList(principal);
+    @GetMapping("/beneficiary")
+    public String beneficiary(Model model, Principal principal) {
+        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
-        Recipient recipient = new Recipient();
+        Beneficiary beneficiary = new Beneficiary();
 
-        model.addAttribute("recipientList", recipientList);
-        model.addAttribute("recipient", recipient);
+        model.addAttribute("beneficiaries", beneficiaries);
+        model.addAttribute("beneficiary", beneficiary);
 
         return "beneficiary";
     }
 
-    @PostMapping("/recipient/save")
-    public String recipientPost(@ModelAttribute("recipient") Recipient recipient, Principal principal) {
+    @PostMapping("/beneficiary/save")
+    public String beneficiaryPost(@ModelAttribute("recipient") Beneficiary recipient, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
         recipient.setUser(user);
         transactionService.saveRecipient(recipient);
 
-        return "redirect:/transfer/recipient";
+        return "redirect:/transfer/beneficiary";
     }
 
-    @GetMapping("/recipient/edit")
-    public String recipientEdit(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
+    @GetMapping("/beneficiary/edit")
+    public String beneficiaryEdit(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
 
-        Recipient recipient = transactionService.findRecipientByName(recipientName);
-        List<Recipient> recipientList = transactionService.findRecipientList(principal);
+        Beneficiary beneficiary = transactionService.findRecipientByName(recipientName);
+        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
-        model.addAttribute("recipientList", recipientList);
-        model.addAttribute("recipient", recipient);
+        model.addAttribute("beneficiaries", beneficiaries);
+        model.addAttribute("beneficiary", beneficiary);
 
         return "beneficiary";
     }
 
     @GetMapping("/recipient/delete")
     @Transactional
-    public String recipientDelete(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
+    public String beneficiaryDelete(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
 
         transactionService.deleteRecipientByName(recipientName);
 
-        List<Recipient> recipientList = transactionService.findRecipientList(principal);
+        List<Beneficiary> recipientList = transactionService.findRecipientList(principal);
 
-        Recipient recipient = new Recipient();
+        Beneficiary recipient = new Beneficiary();
         model.addAttribute("recipient", recipient);
         model.addAttribute("recipientList", recipientList);
 
@@ -101,9 +101,9 @@ public class TransferController {
 
     @GetMapping("/toSomeoneElse")
     public String toSomeoneElse(Model model, Principal principal) {
-        List<Recipient> recipientList = transactionService.findRecipientList(principal);
+        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
-        model.addAttribute("recipientList", recipientList);
+        model.addAttribute("beneficiaries", beneficiaries);
         model.addAttribute("accountType", "");
 
         return "toSomeoneElse";
@@ -112,7 +112,7 @@ public class TransferController {
     @PostMapping("/toSomeoneElse")
     public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName, @ModelAttribute("accountType") String accountType, @ModelAttribute("amount") String amount, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        Recipient recipient = transactionService.findRecipientByName(recipientName);
+        Beneficiary recipient = transactionService.findRecipientByName(recipientName);
         transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(), user.getSavingsAccount());
 
         return "redirect:/dashboard";

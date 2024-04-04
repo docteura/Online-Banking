@@ -16,7 +16,7 @@ import com.obs.dao.SavingsAccountDao;
 import com.obs.dao.SavingsTransactionDao;
 import com.obs.domain.PrimaryAccount;
 import com.obs.domain.PrimaryTransaction;
-import com.obs.domain.Recipient;
+import com.obs.domain.Beneficiary;
 import com.obs.domain.SavingsAccount;
 import com.obs.domain.SavingsTransaction;
 import com.obs.domain.User;
@@ -114,9 +114,9 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 	}
 
-	public List<Recipient> findRecipientList(Principal principal) {
+	public List<Beneficiary> findRecipientList(Principal principal) {
 		String username = principal.getName();
-		List<Recipient> recipientList = recipientDao.findAll().stream() // convert list to stream
+		List<Beneficiary> recipientList = recipientDao.findAll().stream() // convert list to stream
 				.filter(recipient -> username.equals(recipient.getUser().getUsername())) // filters the line, equals to
 																							// username
 				.collect(Collectors.toList());
@@ -124,11 +124,11 @@ public class TransactionServiceImpl implements TransactionService {
 		return recipientList;
 	}
 
-	public Recipient saveRecipient(Recipient recipient) {
+	public Beneficiary saveRecipient(Beneficiary recipient) {
 		return recipientDao.save(recipient);
 	}
 
-	public Recipient findRecipientByName(String recipientName) {
+	public Beneficiary findRecipientByName(String recipientName) {
 		return recipientDao.findByName(recipientName);
 	}
 
@@ -136,7 +136,7 @@ public class TransactionServiceImpl implements TransactionService {
 		recipientDao.deleteByName(recipientName);
 	}
 
-	public void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount,
+	public void toSomeoneElseTransfer(Beneficiary recipient, String accountType, String amount,
 			PrimaryAccount primaryAccount, SavingsAccount savingsAccount) {
 		if (accountType.equalsIgnoreCase("Primary")) {
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));

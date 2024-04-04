@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Recipient {
+public class Beneficiary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

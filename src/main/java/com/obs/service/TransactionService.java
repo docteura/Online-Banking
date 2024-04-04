@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.obs.domain.PrimaryAccount;
 import com.obs.domain.PrimaryTransaction;
-import com.obs.domain.Recipient;
+import com.obs.domain.Beneficiary;
 import com.obs.domain.SavingsAccount;
 import com.obs.domain.SavingsTransaction;
 
@@ -23,13 +23,13 @@ public interface TransactionService {
     
     void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception;
     
-    List<Recipient> findRecipientList(Principal principal);
+    List<Beneficiary> findRecipientList(Principal principal);
 
-    Recipient saveRecipient(Recipient recipient);
+    Beneficiary saveRecipient(Beneficiary recipient);
 
-    Recipient findRecipientByName(String recipientName);
+    Beneficiary findRecipientByName(String recipientName);
 
     void deleteRecipientByName(String recipientName);
     
-    void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount);
+    void toSomeoneElseTransfer(Beneficiary recipient, String accountType, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount);
 }
