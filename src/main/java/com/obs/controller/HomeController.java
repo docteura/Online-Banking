@@ -41,7 +41,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		String success = (String) model.asMap().get("success");
-		boolean flag = (boolean) model.asMap().get("flag");
+		Boolean flag = (Boolean) model.asMap().get("flag");
 		model.addAttribute("success", success);
 		model.addAttribute("flag", flag);
 		return "redirect:/index";
