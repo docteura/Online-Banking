@@ -160,4 +160,14 @@ public class TransactionServiceImpl implements TransactionService {
 			savingsTransactionDao.save(savingsTransaction);
 		}
 	}
+
+	@Override
+	public Beneficiary findRecipientById(Long id) {
+		return recipientDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public void deleteRecipientById(Long id) {
+		recipientDao.deleteById(id);
+	}
 }

@@ -72,9 +72,9 @@ public class TransferController {
     }
 
     @GetMapping("/beneficiary/edit")
-    public String beneficiaryEdit(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
+    public String beneficiaryEdit(@RequestParam(value = "id") Long id, Model model, Principal principal){
 
-        Beneficiary beneficiary = transactionService.findRecipientByName(recipientName);
+        Beneficiary beneficiary = transactionService.findRecipientById(id);
         List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
         model.addAttribute("beneficiaries", beneficiaries);
@@ -85,15 +85,15 @@ public class TransferController {
 
     @GetMapping("/beneficiary/delete")
     @Transactional
-    public String beneficiaryDelete(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
+    public String beneficiaryDelete(@RequestParam(value = "id") Long id, Model model, Principal principal){
 
-        transactionService.deleteRecipientByName(recipientName);
+        transactionService.deleteRecipientById(id);
 
-        List<Beneficiary> recipientList = transactionService.findRecipientList(principal);
+        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
 
-        Beneficiary recipient = new Beneficiary();
-        model.addAttribute("recipient", recipient);
-        model.addAttribute("recipientList", recipientList);
+        Beneficiary beneficiary = new Beneficiary();
+        model.addAttribute("beneficiary", beneficiary);
+        model.addAttribute("beneficiaries", beneficiaries);
 
 
         return "beneficiary";
