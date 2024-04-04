@@ -1,4 +1,4 @@
-package com.obs.service.UserServiceImpl;
+package com.obs.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;

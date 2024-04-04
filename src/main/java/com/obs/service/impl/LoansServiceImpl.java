@@ -1,4 +1,4 @@
-package com.obs.service.UserServiceImpl;
+package com.obs.service.impl;
 
 import org.springframework.stereotype.Service;
 

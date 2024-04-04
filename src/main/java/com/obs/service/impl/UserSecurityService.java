@@ -1,4 +1,4 @@
-package com.obs.service.UserServiceImpl;
+package com.obs.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.obs.service.UserServiceImpl;
+package com.obs.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
