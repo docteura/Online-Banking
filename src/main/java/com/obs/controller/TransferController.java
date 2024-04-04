@@ -62,11 +62,11 @@ public class TransferController {
     }
 
     @PostMapping("/beneficiary/save")
-    public String beneficiaryPost(@ModelAttribute("recipient") Beneficiary recipient, Principal principal) {
+    public String beneficiaryPost(@ModelAttribute("beneficiary") Beneficiary beneficiary, Principal principal) {
 
         User user = userService.findByUsername(principal.getName());
-        recipient.setUser(user);
-        transactionService.saveRecipient(recipient);
+        beneficiary.setUser(user);
+        transactionService.saveRecipient(beneficiary);
 
         return "redirect:/transfer/beneficiary";
     }
