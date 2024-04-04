@@ -26,6 +26,7 @@ public class UserController {
 
     @GetMapping(value = "/profile")
     public String profile(Principal principal, Model model) {
+    	logger.info("UserController --> profile ----> START");
         User user = userService.findByUsername(principal.getName());
 
         model.addAttribute("user", user);
@@ -35,6 +36,7 @@ public class UserController {
 
     @PostMapping("/profile")
     public String profilePost(@ModelAttribute("user") User newUser, Model model) {
+    	logger.info("UserController --> profilePost ----> START");
         User user = userService.findByUsername(newUser.getUsername());
         user.setUsername(newUser.getUsername());
         user.setFirstName(newUser.getFirstName());

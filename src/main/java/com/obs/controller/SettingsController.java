@@ -19,7 +19,7 @@ import com.obs.service.UserService;
 public class SettingsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SettingsController.class);
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -28,6 +28,7 @@ public class SettingsController {
 
 	@GetMapping("/details")
 	public String settings(Principal principal, Model model) {
+		logger.info("SettingsController --> settings ----> START");
 		User user = userService.findByUsername(principal.getName());
 
 		model.addAttribute("user", user);
