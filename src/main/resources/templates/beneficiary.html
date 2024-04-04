@@ -8,32 +8,32 @@
         <div class="col-md-6" style=" border: dashed 2px #2c99bb;">
             <h3>Beneficiary Information</h3>
             <form th:action="@{/transfer/beneficiary/save}" method="post">
-                <input type="hidden" name="id" th:value="${recipient.id}" />
+                <input type="hidden" name="id" th:value="${beneficiary.id}" />
 
                 <div class="form-group">
                     <label for="recipientName">Name</label>
-                    <input type="text" class="form-control" th:value="${recipient.name}" name="name"
+                    <input type="text" class="form-control" th:value="${beneficiary.name}" name="name"
                            id="recipientName" placeholder="Name"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientEmail">Email</label>
-                    <input type="email" class="form-control" th:value="${recipient.email}" name="email"
+                    <input type="email" class="form-control" th:value="${beneficiary.email}" name="email"
                            id="recipientEmail" placeholder="Email"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientPhone">Phone</label>
-                    <input type="text" class="form-control" th:value="${recipient.phone}" name="phone"
+                    <input type="text" class="form-control" th:value="${beneficiary.phone}" name="phone"
                            id="recipientPhone" placeholder="Phone"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientAccountNumber">Account Number (***-****-***)</label>
-                    <input type="text" class="form-control" th:value="${recipient.accountNumber}"
+                    <input type="text" class="form-control" th:value="${beneficiary.accountNumber}"
                            name="accountNumber" id="recipientAccountNumber" placeholder="Account Number (***-****-***)" maxlength="12"/>
                 </div>
                 <div class="form-group">
                     <label for="recipientDescription">Description</label>
-                    <textarea class="form-control" th:value="${recipient.description}" name="description"
-                              id="recipientDescription" placeholder="Description" th:text="${recipient.description}"></textarea>
+                    <textarea class="form-control" th:value="${beneficiary.description}" name="description"
+                              id="recipientDescription" placeholder="Description" th:text="${beneficiary.description}"></textarea>
                 </div>
 
                 <input type="hidden"

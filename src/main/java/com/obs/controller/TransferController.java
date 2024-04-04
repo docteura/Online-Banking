@@ -83,7 +83,7 @@ public class TransferController {
         return "beneficiary";
     }
 
-    @GetMapping("/recipient/delete")
+    @GetMapping("/beneficiary/delete")
     @Transactional
     public String beneficiaryDelete(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
 
