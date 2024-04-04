@@ -8,10 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.obs.domain.PrimaryAccount;
-import com.obs.domain.Beneficiary;
-import com.obs.domain.SavingsAccount;
-import com.obs.domain.User;
+
+import com.obs.entity.Beneficiary;
+import com.obs.entity.PrimaryAccount;
+import com.obs.entity.SavingsAccount;
+import com.obs.entity.User;
 import com.obs.service.TransactionService;
 import com.obs.service.UserService;
 

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.obs.domain.CreditCard;
-import com.obs.domain.User;
+import com.obs.entity.CreditCard;
+import com.obs.entity.User;
 import com.obs.service.CreditCardService;
 import com.obs.service.UserService;
 

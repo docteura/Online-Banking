@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.obs.dao.PrimaryAccountDao;
-import com.obs.dao.PrimaryTransactionDao;
-import com.obs.dao.RecipientDao;
-import com.obs.dao.SavingsAccountDao;
-import com.obs.dao.SavingsTransactionDao;
-import com.obs.domain.PrimaryAccount;
-import com.obs.domain.PrimaryTransaction;
-import com.obs.domain.Beneficiary;
-import com.obs.domain.SavingsAccount;
-import com.obs.domain.SavingsTransaction;
-import com.obs.domain.User;
+import com.obs.entity.Beneficiary;
+import com.obs.entity.PrimaryAccount;
+import com.obs.entity.PrimaryTransaction;
+import com.obs.entity.SavingsAccount;
+import com.obs.entity.SavingsTransaction;
+import com.obs.entity.User;
+import com.obs.repository.PrimaryAccountRepository;
+import com.obs.repository.PrimaryTransactionRepository;
+import com.obs.repository.RecipientRepository;
+import com.obs.repository.SavingsAccountRepository;
+import com.obs.repository.SavingsTransactionRepository;
 import com.obs.service.TransactionService;
 import com.obs.service.UserService;
 
@@ -30,19 +30,19 @@ public class TransactionServiceImpl implements TransactionService {
 	private UserService userService;
 
 	@Autowired
-	private PrimaryTransactionDao primaryTransactionDao;
+	private PrimaryTransactionRepository primaryTransactionDao;
 
 	@Autowired
-	private SavingsTransactionDao savingsTransactionDao;
+	private SavingsTransactionRepository savingsTransactionDao;
 
 	@Autowired
-	private PrimaryAccountDao primaryAccountDao;
+	private PrimaryAccountRepository primaryAccountDao;
 
 	@Autowired
-	private SavingsAccountDao savingsAccountDao;
+	private SavingsAccountRepository savingsAccountDao;
 
 	@Autowired
-	private RecipientDao recipientDao;
+	private RecipientRepository recipientDao;
 
 	public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
 		User user = userService.findByUsername(username);

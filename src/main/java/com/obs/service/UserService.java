@@ -3,29 +3,29 @@ package com.obs.service;
 import java.util.List;
 import java.util.Set;
 
-import com.obs.domain.User;
-import com.obs.domain.security.UserRole;
+import com.obs.entity.User;
+import com.obs.security.UserRole;
 
 public interface UserService {
 	User findByUsername(String username);
 
-    User findByEmail(String email);
+	User findByEmail(String email);
 
-    boolean checkUserExists(String username, String email);
+	boolean checkUserExists(String username, String email);
 
-    boolean checkUsernameExists(String username);
+	boolean checkUsernameExists(String username);
 
-    boolean checkEmailExists(String email);
-    
-    void save (User user);
-    
-    User createUser(User user, Set<UserRole> userRoles);
-    
-    User saveUser (User user); 
-    
-    List<User> findUserList();
+	boolean checkEmailExists(String email);
 
-    void enableUser (String username);
+	void save(User user);
 
-    void disableUser (String username);
+	User createUser(User user, Set<UserRole> userRoles);
+
+	User saveUser(User user);
+
+	List<User> findUserList();
+
+	void enableUser(String username);
+
+	void disableUser(String username);
 }

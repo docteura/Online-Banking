@@ -13,14 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.obs.dao.RoleDao;
-import com.obs.dao.UserDao;
-import com.obs.dao.util.EmailUtil;
-import com.obs.dao.util.OtpUtil;
-import com.obs.domain.User;
-import com.obs.domain.security.UserRole;
+import com.obs.entity.User;
+import com.obs.repository.RoleRepository;
+import com.obs.repository.UserRepository;
+import com.obs.security.UserRole;
 import com.obs.service.AccountService;
 import com.obs.service.UserService;
+import com.obs.util.EmailUtil;
+import com.obs.util.OtpUtil;
 
 @Service
 @Transactional
@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService {
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userDao;
 
 	@Autowired
-	private RoleDao roleDao;
+	private RoleRepository roleDao;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -74,11 +74,11 @@ public class UserServiceImpl implements UserService {
 
 			user.setPrimaryAccount(accountService.createPrimaryAccount());
 			user.setSavingsAccount(accountService.createSavingsAccount());
-			
+
 			String otp = otpUtil.generateOtp();
-			
+
 			user.setOtp(otp);
-		    user.setOtpGeneratedTime(LocalDateTime.now());
+			user.setOtpGeneratedTime(LocalDateTime.now());
 			try {
 				emailUtil.sendOtpEmail(user.getEmail(), otp);
 			} catch (MessagingException e) {

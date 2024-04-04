@@ -2,7 +2,7 @@ package com.obs.service;
 
 import java.util.List;
 
-import com.obs.domain.CreditCard;
+import com.obs.entity.CreditCard;
 
 public interface CreditCardService {
 

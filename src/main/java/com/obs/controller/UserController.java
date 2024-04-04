@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.obs.domain.User;
+import com.obs.entity.User;
 import com.obs.service.UserService;
 
 @Controller

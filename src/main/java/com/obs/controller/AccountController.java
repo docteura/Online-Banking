@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.obs.domain.PrimaryAccount;
-import com.obs.domain.PrimaryTransaction;
-import com.obs.domain.SavingsAccount;
-import com.obs.domain.SavingsTransaction;
-import com.obs.domain.User;
+
+import com.obs.entity.PrimaryAccount;
+import com.obs.entity.PrimaryTransaction;
+import com.obs.entity.SavingsAccount;
+import com.obs.entity.SavingsTransaction;
+import com.obs.entity.User;
 import com.obs.service.AccountService;
 import com.obs.service.TransactionService;
 import com.obs.service.UserService;

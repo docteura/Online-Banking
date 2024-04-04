@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.obs.dao.CreditCardDao;
-import com.obs.domain.CreditCard;
+import com.obs.entity.CreditCard;
+import com.obs.repository.CreditCardRepository;
 import com.obs.service.CreditCardService;
 
 @Service
@@ -17,7 +17,7 @@ import com.obs.service.CreditCardService;
 public class CreditCardServiceImpl implements CreditCardService {
 
 	@Autowired
-	CreditCardDao creditCardDao;
+	CreditCardRepository creditCardDao;
 
 	@Override
 	public void saveCreditCard(CreditCard creditCard) {

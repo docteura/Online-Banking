@@ -2,16 +2,16 @@ package com.obs.service;
 
 import java.util.List;
 
-import com.obs.domain.Appointment;
+import com.obs.entity.Appointment;
 
 public interface AppointmentService {
 	Appointment createAppointment(Appointment appointment);
 
-    List<Appointment> findAll();
+	List<Appointment> findAll();
 
-    Appointment findAppointment(Long id);
+	Appointment findAppointment(Long id);
 
-    void confirmAppointment(Long id);
+	void confirmAppointment(Long id);
 
 	List<Appointment> getAppointments(Long userId);
 }

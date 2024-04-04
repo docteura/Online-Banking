@@ -8,13 +8,13 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.obs.dao.UserDao;
-import com.obs.dao.util.EmailUtil;
-import com.obs.dao.util.OtpUtil;
-import com.obs.domain.User;
 import com.obs.dto.LoginDto;
 import com.obs.dto.RegisterDto;
+import com.obs.entity.User;
+import com.obs.repository.UserRepository;
 import com.obs.service.EmailService;
+import com.obs.util.EmailUtil;
+import com.obs.util.OtpUtil;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -23,9 +23,9 @@ public class EmailServiceImpl implements EmailService {
 	private OtpUtil otpUtil;
 	@Autowired
 	private EmailUtil emailUtil;
-	
+
 	@Autowired
-	private UserDao userRepository;
+	private UserRepository userRepository;
 
 	public String register(RegisterDto registerDto) {
 		String otp = otpUtil.generateOtp();

@@ -12,15 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.obs.dao.RoleDao;
-import com.obs.domain.PrimaryAccount;
-import com.obs.domain.SavingsAccount;
-import com.obs.domain.User;
-import com.obs.domain.security.UserRole;
+import com.obs.entity.PrimaryAccount;
+import com.obs.entity.SavingsAccount;
+import com.obs.entity.User;
+import com.obs.repository.RoleRepository;
+import com.obs.security.UserRole;
 import com.obs.service.EmailService;
 import com.obs.service.UserService;
 
@@ -33,7 +32,7 @@ public class HomeController {
 	private UserService userService;
 
 	@Autowired
-	private RoleDao roleDao;
+	private RoleRepository roleDao;
 
 	@Autowired
 	private EmailService emailService;
