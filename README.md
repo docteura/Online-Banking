@@ -18,7 +18,10 @@ The Banking system consists of two parts: User-Front and Admin-Portal. Front-End
 - Spring Data JPA
 - MYSQL
 - Maven 
-
+- Hibernate
+- Spring Mail
+- Thymeleaf
+- HTML  
 
 
 ## Contributing
