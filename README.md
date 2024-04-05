@@ -9,7 +9,7 @@ Spring Boot Online Banking  About This is a project for practicing Spring Boot +
 It was made using Spring Boot, Spring Security, Thymeleaf, Spring Data JPA, Spring Data R ST, JavaScript, JQuery. Database is MYSQL Workbench.
 Online Banking Requirements
 
-# About
+## About
 
 The Banking system consists of two parts: User-Front and Admin-Portal. Front-End is a user-facing system and it includes such modules as User Signup/Login, Account, Bank Transfer, Appointment, Transaction, Creditcards and User Profile.
 
