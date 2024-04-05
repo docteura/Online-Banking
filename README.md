@@ -1,18 +1,17 @@
 # Smart Online-Banking
-Spring Boot Online Banking 
-About
-This is a project for practicing Spring Boot + Thymeleaf. The idea was to build Smart online banking system.
-
-It was made using Spring Boot, Spring Security, Thymeleaf, Spring Data JPA, Spring Data R ST, JavaScript, JQuery. Database is MYSQL Workbench.
-Online Banking Requirements
-
-About
-
-The Banking system consists of two parts: User-Front and Admin-Portal. Front-End is a user-facing system and it includes such modules as User Signup/Login, Account, Bank Transfer, Appointment, Transaction, Creditcards and User Profile.
 
 ## Introduction
 
 The Bank Management System is a web-based application developed using Spring Boot that aims to streamline various banking operations. This system offers features to manage customer accounts and perform transactions.
+
+Spring Boot Online Banking  About This is a project for practicing Spring Boot + Thymeleaf. The idea was to build Smart online banking system.
+
+It was made using Spring Boot, Spring Security, Thymeleaf, Spring Data JPA, Spring Data R ST, JavaScript, JQuery. Database is MYSQL Workbench.
+Online Banking Requirements
+
+# About
+
+The Banking system consists of two parts: User-Front and Admin-Portal. Front-End is a user-facing system and it includes such modules as User Signup/Login, Account, Bank Transfer, Appointment, Transaction, Creditcards and User Profile.
 
 
 ## Technologies Used
