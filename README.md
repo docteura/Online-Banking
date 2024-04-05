@@ -1,9 +1,9 @@
-# Online-Banking
+# Smart Online-Banking
 Spring Boot Online Banking 
 About
-This is a project for practicing Spring Boot + Thymeleaf. The idea was to build online banking operations.
+This is a project for practicing Spring Boot + Thymeleaf. The idea was to build Smart online banking system.
 
-It was made using Spring Boot, Spring Security, Thymeleaf, Spring Data JPA, Spring Data REST, JavaScript, JQuery. Database is MYSQL Workbench.
+It was made using Spring Boot, Spring Security, Thymeleaf, Spring Data JPA, Spring Data R ST, JavaScript, JQuery. Database is MYSQL Workbench.
 Online Banking Requirements
 
 About
