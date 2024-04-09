@@ -47,7 +47,7 @@ public class AccountController {
 
         model.addAttribute("primaryAccount", primaryAccount);
         model.addAttribute("primaryTransactionList", primaryTransactionList);
-		
+        logger.info("AccountController --> primaryAccount ---> END");
 		return "primaryAccount";
 	}
 
@@ -60,7 +60,7 @@ public class AccountController {
 
         model.addAttribute("savingsAccount", savingsAccount);
         model.addAttribute("savingsTransactionList", savingsTransactionList);
-
+        logger.info("AccountController --> savingsAccount ---> END");
         return "savingsAccount";
     }
 	
