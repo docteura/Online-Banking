@@ -114,29 +114,29 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 	}
 
-	public List<Beneficiary> findRecipientList(Principal principal) {
+	public List<Beneficiary> findBeneficiaryList(Principal principal) {
 		String username = principal.getName();
-		List<Beneficiary> recipientList = recipientDao.findAll().stream() // convert list to stream
-				.filter(recipient -> username.equals(recipient.getUser().getUsername())) // filters the line, equals to
+		List<Beneficiary> beneficiaries = recipientDao.findAll().stream() // convert list to stream
+				.filter(beneficiary -> username.equals(beneficiary.getUser().getUsername())) // filters the line, equals to
 																							// username
 				.collect(Collectors.toList());
 
-		return recipientList;
+		return beneficiaries;
 	}
 
-	public Beneficiary saveRecipient(Beneficiary recipient) {
-		return recipientDao.save(recipient);
+	public Beneficiary saveBeneficiary(Beneficiary beneficiary) {
+		return recipientDao.save(beneficiary);
 	}
 
-	public Beneficiary findRecipientByName(String recipientName) {
-		return recipientDao.findByName(recipientName);
+	public Beneficiary findBeneficiaryByName(String beneficiaryName) {
+		return recipientDao.findByName(beneficiaryName);
 	}
 
-	public void deleteRecipientByName(String recipientName) {
-		recipientDao.deleteByName(recipientName);
+	public void deleteBeneficiaryByName(String beneficiaryName) {
+		recipientDao.deleteByName(beneficiaryName);
 	}
 
-	public void toSomeoneElseTransfer(Beneficiary recipient, String accountType, String amount,
+	public void toSomeoneElseTransfer(Beneficiary beneficiary, String accountType, String amount,
 			PrimaryAccount primaryAccount, SavingsAccount savingsAccount) {
 		if (accountType.equalsIgnoreCase("Primary")) {
 			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -145,7 +145,7 @@ public class TransactionServiceImpl implements TransactionService {
 			Date date = new Date();
 
 			PrimaryTransaction primaryTransaction = new PrimaryTransaction(date,
-					"Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount),
+					"Transfer to recipient " + beneficiary.getName(), "Transfer", "Finished", Double.parseDouble(amount),
 					primaryAccount.getAccountBalance(), primaryAccount, "DR");
 			primaryTransactionDao.save(primaryTransaction);
 		} else if (accountType.equalsIgnoreCase("Savings")) {
@@ -155,19 +155,19 @@ public class TransactionServiceImpl implements TransactionService {
 			Date date = new Date();
 
 			SavingsTransaction savingsTransaction = new SavingsTransaction(date,
-					"Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount),
+					"Transfer to recipient " + beneficiary.getName(), "Transfer", "Finished", Double.parseDouble(amount),
 					savingsAccount.getAccountBalance(), savingsAccount, "DR");
 			savingsTransactionDao.save(savingsTransaction);
 		}
 	}
 
 	@Override
-	public Beneficiary findRecipientById(Long id) {
+	public Beneficiary findBeneficiaryById(Long id) {
 		return recipientDao.findById(id).orElse(null);
 	}
 
 	@Override
-	public void deleteRecipientById(Long id) {
+	public void deleteBeneficiaryById(Long id) {
 		recipientDao.deleteById(id);
 	}
 }

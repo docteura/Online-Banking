@@ -59,7 +59,7 @@ public class TransferController {
     @GetMapping("/beneficiary")
     public String beneficiary(Model model, Principal principal) {
     	logger.info("TransferController --> beneficiary ----> START");
-        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
+        List<Beneficiary> beneficiaries = transactionService.findBeneficiaryList(principal);
 
         Beneficiary beneficiary = new Beneficiary();
 
@@ -74,7 +74,7 @@ public class TransferController {
     	logger.info("TransferController --> beneficiaryPost ----> START");
         User user = userService.findByUsername(principal.getName());
         beneficiary.setUser(user);
-        transactionService.saveRecipient(beneficiary);
+        transactionService.saveBeneficiary(beneficiary);
 
         return "redirect:/transfer/beneficiary";
     }
@@ -82,8 +82,8 @@ public class TransferController {
     @GetMapping("/beneficiary/edit")
     public String beneficiaryEdit(@RequestParam(value = "id") Long id, Model model, Principal principal){
     	logger.info("TransferController --> beneficiaryEdit ----> START");
-        Beneficiary beneficiary = transactionService.findRecipientById(id);
-        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
+        Beneficiary beneficiary = transactionService.findBeneficiaryById(id);
+        List<Beneficiary> beneficiaries = transactionService.findBeneficiaryList(principal);
 
         model.addAttribute("beneficiaries", beneficiaries);
         model.addAttribute("beneficiary", beneficiary);
@@ -95,9 +95,9 @@ public class TransferController {
     @Transactional
     public String beneficiaryDelete(@RequestParam(value = "id") Long id, Model model, Principal principal){
     	logger.info("TransferController --> beneficiaryDelete ----> START");
-        transactionService.deleteRecipientById(id);
+        transactionService.deleteBeneficiaryById(id);
 
-        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
+        List<Beneficiary> beneficiaries = transactionService.findBeneficiaryList(principal);
 
         Beneficiary beneficiary = new Beneficiary();
         model.addAttribute("beneficiary", beneficiary);
@@ -110,7 +110,7 @@ public class TransferController {
     @GetMapping("/toSomeoneElse")
     public String toSomeoneElse(Model model, Principal principal) {
     	logger.info("TransferController --> toSomeoneElse ----> START");
-        List<Beneficiary> beneficiaries = transactionService.findRecipientList(principal);
+        List<Beneficiary> beneficiaries = transactionService.findBeneficiaryList(principal);
 
         model.addAttribute("beneficiaries", beneficiaries);
         model.addAttribute("accountType", "");
@@ -122,7 +122,7 @@ public class TransferController {
     public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName, @ModelAttribute("accountType") String accountType, @ModelAttribute("amount") String amount, Principal principal) {
     	logger.info("TransferController --> toSomeoneElsePost ----> START");
     	User user = userService.findByUsername(principal.getName());
-        Beneficiary recipient = transactionService.findRecipientByName(recipientName);
+        Beneficiary recipient = transactionService.findBeneficiaryByName(recipientName);
         transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(), user.getSavingsAccount());
 
         return "redirect:/dashboard";

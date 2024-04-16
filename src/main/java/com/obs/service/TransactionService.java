@@ -25,18 +25,18 @@ public interface TransactionService {
 	void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount,
 			SavingsAccount savingsAccount) throws Exception;
 
-	List<Beneficiary> findRecipientList(Principal principal);
+	List<Beneficiary> findBeneficiaryList(Principal principal);
 
-	Beneficiary saveRecipient(Beneficiary recipient);
+	Beneficiary saveBeneficiary(Beneficiary recipient);
 
-	Beneficiary findRecipientByName(String recipientName);
+	Beneficiary findBeneficiaryByName(String recipientName);
 
-	void deleteRecipientByName(String recipientName);
+	void deleteBeneficiaryByName(String recipientName);
 
 	void toSomeoneElseTransfer(Beneficiary recipient, String accountType, String amount, PrimaryAccount primaryAccount,
 			SavingsAccount savingsAccount);
 
-	Beneficiary findRecipientById(Long id);
+	Beneficiary findBeneficiaryById(Long id);
 
-	void deleteRecipientById(Long id);
+	void deleteBeneficiaryById(Long id);
 }
